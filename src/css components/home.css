@@ -1,0 +1,71 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container{
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 1rem auto;
+  
+}
+.title-btn{
+ display: flex;
+ justify-content: center;
+ flex-wrap: wrap;
+ gap: 2rem;
+ padding: 1rem;
+}
+#paste-title{
+  width: 60%;
+  border-radius:0.625rem;
+  padding: 1rem;
+}
+.textarea {
+  width: 50vw;
+  height: 60vh;
+  margin: auto;
+  background-color: #3B3B3B;         /*black background*/
+  border-radius: 0.625rem;
+  overflow: hidden;
+  transition: all 0.1s linear;
+}
+.textarea:hover{
+  border: 1.5px solid #646cff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+/* Tiptap editor content area */
+.details {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none;
+  overflow-y: auto;
+  color: #fff;                    /* white text */
+}
+
+/* Remove the white inner border (from Tiptap's ProseMirror) */
+.details .ProseMirror {
+  outline: none;
+  border: none;
+  min-height: 100%;
+  width: 100%;
+  background-color: transparent;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+  white-space: pre-wrap;
+}
+.Tool-buttons{
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}

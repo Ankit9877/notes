@@ -1,0 +1,15 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#title-txt{
+  width: 40vw;
+  height: 2rem;
+  border-radius: 0.625rem;
+  padding: 1rem;
+  background-color: #3B3B3B;
+}
+.details{
+  padding: 1rem;
+}

@@ -1,0 +1,197 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.paste-container{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.paste-history{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0re;
+  gap: 2rem;
+}
+.search-txt{
+  width: 62%;
+  height:2rem;
+  margin: 0.7rem 0rem;
+  border-radius: 0.625rem;
+}
+.paste-contents{
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  /* min-gap:10%; */
+  min-height: 15rem;
+  border: 2px solid beige;
+  padding: 0.5rem 1rem;
+  border-radius: 0.625rem;
+}
+.paste-contents:hover{
+  border: 1.5px solid #646cff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.paste-details{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5%;
+  overflow: hidden;
+
+}
+/* .paste-details p{
+} */
+.paste-nav{
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  /* padding:0.3rem 0.1rem; */
+}
+.paste-buttons{
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+@media screen and (max-width:690px){
+  .paste-buttons{
+    flex-direction: column;
+    padding-right: 0.2rem;
+  }
+  .paste-nav{
+    padding: 0.3rem;
+  }
+  .date-contents{
+    width: 60%;
+  }
+  .paste-nav{
+    width: 40%;
+    gap: 1.2rem;
+  }
+}
+.paste-created-date{
+  font-size: x-small;
+}
+.share{
+  /* position: fixed; */
+  min-width: 30vw;
+  min-height: 30vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: azure;
+  color: black;
+  padding: 1rem;
+  padding-right: 0.5;
+  border-radius: 0.625rem;
+  /* display: flex; */
+}
+.share_content{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.link-input{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.close-share{
+  width: fit-content;
+  padding: 0.4rem 0.7rem;
+  
+}
+.Anyone-who{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+  text-align: start;
+}
+.copy-link{
+  width: 95%;
+  height: 2rem;
+  border-radius: 0.625rem;
+  padding: 0.77rem;
+}
+.overlay{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+#paste-content{
+  /* opacity: 0.8; */
+  text-align: start;
+}
+.icons{
+  display: flex;
+  justify-content: start;
+  gap: 8px;
+  padding:0.5rem 0.3rem;
+}
+#Fb,#X,#Email{
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
+  padding: 1rem;
+}
+#Fb-icon,#X-icon,#Email-icon{
+  height: 100%;
+  width: 100%;
+}
+.paste-created-date{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+#delete-all{
+  width: fit-content;
+  /* height: 2rem; */
+   padding:1rem;
+   margin:0 auto;
+   background-color: rgba(149, 14, 14, 0.821);
+  border-radius: 0.625rem;
+  font-family: 1.2rem;
+  color: beige;
+}
+#delete-all:hover{
+  border: 1.3px solid red;
+}
+.paste-buttons button{
+  width: auto;
+  height: auto;
+}
+.date-contents{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 45%;
+  /* height: 100%; */
+}
+.paste-details{
+  width: 100%; /* or a fixed value like 300px */
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+#paste-content{
+  opacity: 0.8;
+}
+.search-txt{
+  padding: 1rem;
+}
