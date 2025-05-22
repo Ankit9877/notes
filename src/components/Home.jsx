@@ -67,7 +67,7 @@ const Home = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <button onClick={createPaste}>
+        <button onClick={createPaste} id='paste-create'>
           {pasteId ? "Update my Paste" : "Create my Paste"}
         </button>
       </div>

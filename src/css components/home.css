@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* align-items: center; */
   gap: 1.2rem;
   margin: 1rem auto;
   
@@ -15,7 +16,7 @@
 .title-btn{
  display: flex;
  justify-content: center;
- flex-wrap: wrap;
+ /* flex-wrap: wrap; */
  gap: 2rem;
  padding: 1rem;
 }
@@ -27,11 +28,34 @@
 .textarea {
   width: 50vw;
   height: 60vh;
-  margin: auto;
+  margin: 0 auto;
   background-color: #3B3B3B;         /*black background*/
   border-radius: 0.625rem;
   overflow: hidden;
   transition: all 0.1s linear;
+}
+@media screen and (max-width:836px ){
+  .textarea{
+    width: 65vw;
+   min-height: 30vh;
+  }
+  #paste-title{
+    width: 50vw;
+  }
+  .title-btn{
+    flex-direction: column;
+    align-items: center;
+  }
+  #paste-create{
+    width: fit-content;
+    padding: 1rem;
+  }
+}
+@media screen and(max-width:470px) {
+  .textarea{
+    width: 50vw;
+    min-height: 10vh;
+  }
 }
 .textarea:hover{
   border: 1.5px solid #646cff;
