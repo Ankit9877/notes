@@ -37,7 +37,7 @@
 @media screen and (max-width:836px ){
   .textarea{
     width: 65vw;
-   min-height: 30vh;
+   min-height: 20vh;
   }
   #paste-title{
     width: 50vw;
