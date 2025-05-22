@@ -51,7 +51,7 @@
     padding: 1rem;
   }
 }
-@media screen and(max-width:470px) {
+@media screen and(max-width:450px) {
   .textarea{
     width: 50vw;
     min-height: 10vh;
