@@ -1,65 +1,76 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.container{
+
+.container {
   width: 60vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
   gap: 1.2rem;
   margin: 1rem auto;
-  
 }
-.title-btn{
- display: flex;
- justify-content: center;
- /* flex-wrap: wrap; */
- gap: 2rem;
- padding: 1rem;
-}
-#paste-title{
-  width: 60%;
-  border-radius:0.625rem;
+
+.title-btn {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
   padding: 1rem;
 }
+
+#note-title {
+  width: 60%;
+  border-radius: 0.625rem;
+  padding: 1rem;
+}
+
 .textarea {
   width: 50vw;
   height: 60vh;
   margin: 0 auto;
-  background-color: #3B3B3B;         /*black background*/
+  background-color: #3B3B3B;
   border-radius: 0.625rem;
   overflow: hidden;
   transition: all 0.1s linear;
 }
-@media screen and (max-width:836px ){
-  .textarea{
+
+.textarea:hover {
+  border: 1.5px solid #646cff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+              rgba(0, 0, 0, 0.12) 0px -12px 30px,
+              rgba(0, 0, 0, 0.12) 0px 4px 6px,
+              rgba(0, 0, 0, 0.17) 0px 12px 13px,
+              rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+@media screen and (max-width: 836px) {
+  .textarea {
     width: 65vw;
-   min-height: 20vh;
+    min-height: 20vh;
   }
-  #paste-title{
+
+  #note-title {
     width: 50vw;
   }
-  .title-btn{
+
+  .title-btn {
     flex-direction: column;
     align-items: center;
   }
-  #paste-create{
+
+  #note-create {
     width: fit-content;
     padding: 1rem;
   }
 }
-@media screen and(max-width:450px) {
-  .textarea{
+
+@media screen and (max-width: 450px) {
+  .textarea {
     width: 50vw;
     min-height: 10vh;
   }
-}
-.textarea:hover{
-  border: 1.5px solid #646cff;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 /* Tiptap editor content area */
@@ -70,7 +81,7 @@
   box-sizing: border-box;
   outline: none;
   overflow-y: auto;
-  color: #fff;                    /* white text */
+  color: #fff;
 }
 
 /* Remove the white inner border (from Tiptap's ProseMirror) */
@@ -87,7 +98,8 @@
   text-align: left;
   white-space: pre-wrap;
 }
-.Tool-buttons{
+
+.Tool-buttons {
   display: flex;
   justify-content: center;
   gap: 2rem;

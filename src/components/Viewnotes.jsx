@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import '../css components/Viewpastes.css'
-const Viewpastes = () => {
-  const { id } = useParams();
-  const allPastes = useSelector((state) => state.paste.pastes);
-  const paste = allPastes.find((p) => p._id === id);
+import '../css components/Viewnotes.css';
 
-  // Strip HTML tags to show plain text
+const Viewnotes = () => {
+  const { id } = useParams();
+  const allNotes = useSelector((state) => state.note.notes);
+  const note = allNotes.find((n) => n._id === id);
+
   const stripHTML = (htmlString) => {
     const tempElement = document.createElement('div');
     tempElement.innerHTML = htmlString || '';
@@ -19,10 +19,10 @@ const Viewpastes = () => {
       <div className="title-btn">
         <input
           type="text"
-          placeholder="Enter title Here"
-          value={paste?.title || ''}
+          placeholder="Enter title here"
+          value={note?.title || ''}
           disabled
-          id='title-txt'
+          id="title-txt"
         />
       </div>
       <div className="textarea">
@@ -30,11 +30,11 @@ const Viewpastes = () => {
           className="details"
           disabled
           id="description"
-          value={stripHTML(paste?.content)}
+          value={stripHTML(note?.content)}
         />
       </div>
     </div>
   );
 };
 
-export default Viewpastes;
+export default Viewnotes;

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removePaste, resetAllPastes } from '../Redux/pasteSlice';
+import { removeNote, resetAllNotes } from '../Redux/noteSlice';
 import toast from 'react-hot-toast';
 import { NavLink } from 'react-router-dom';
 import html2canvas from 'html2canvas';
@@ -14,37 +14,38 @@ import {
   TwitterIcon,
   EmailIcon,
 } from 'react-share';
-import '../css components/paste.css';
+import '../css components/note.css';
 import { MdOutlineModeEdit } from "react-icons/md";
 import { FaRegCopy } from "react-icons/fa6";
 import { FaShareAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { CiRead } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
-const Paste = () => {
-  const pastes = useSelector((state) => state.paste.pastes);
+
+const Note = () => {
+  const notes = useSelector((state) => state.note.notes);
   const [searchTerm, setSearchTerm] = useState('');
   const [share, setShare] = useState(false);
-  const [Sharelink, setShareLink] = useState('');
+  const [shareLinkValue, setShareLinkValue] = useState('');
   const pdfRef = useRef();
   const dispatch = useDispatch();
 
   const toggleShare = () => setShare(!share);
 
-  const generatePasteURL = (pasteId) => {
-    return `${window.location.origin}/pastes/${pasteId}`;
+  const generateNoteURL = (noteId) => {
+    return `${window.location.origin}/notes/${noteId}`;
   };
 
-  const filterData = pastes.filter((paste) =>
-    paste.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filterData = notes.filter((note) =>
+    note.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const clickDelete = (pasteId) => {
-    dispatch(removePaste(pasteId));
+  const clickDelete = (noteId) => {
+    dispatch(removeNote(noteId));
   };
 
-  const shareLink = (pasteId) => {
-    setShareLink(generatePasteURL(pasteId));
+  const shareLink = (noteId) => {
+    setShareLinkValue(generateNoteURL(noteId));
   };
 
   const formatDate = (unformattedDate) => {
@@ -78,56 +79,57 @@ const Paste = () => {
   };
 
   const deleteAll = () => {
-    dispatch(resetAllPastes());
+    dispatch(resetAllNotes());
   };
- const copyText=(pasteContent)=>{
-  const tempElement = document.createElement('div');
-  tempElement.innerHTML = pasteContent;
-  const plainText = tempElement.innerText;
-  navigator.clipboard.writeText(plainText);
-  toast.success("Note copied successfully");
- }
+
+  const copyText = (noteContent) => {
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = noteContent;
+    const plainText = tempElement.innerText;
+    navigator.clipboard.writeText(plainText);
+    toast.success("Note copied successfully");
+  };
+
   return (
-    <div className="paste-container">
+    <div className="note-container">
       <div>
-        <h2>List of Pastes</h2>
+        <h2>List of Notes</h2>
         <input
           className="search-txt"
           type="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder='search Your title here'
+          placeholder='Search your title here'
         />
       </div>
 
-      <div className="paste-history">
+      <div className="note-history">
         {filterData.length > 0 &&
-          filterData.map((paste) => (
-            <div className="paste-contents" key={paste?._id}>
+          filterData.map((note) => (
+            <div className="note-contents" key={note?._id}>
               <div className='date-contents'>
-              <div className="paste-details" ref={pdfRef}>
-                <p>{paste.title}</p>
-                <div
-                  id="paste-content"
-                  dangerouslySetInnerHTML={{ __html: paste.content }}
-                ></div>
+                <div className="note-details" ref={pdfRef}>
+                  <p>{note.title}</p>
+                  <div
+                    id="note-content"
+                    dangerouslySetInnerHTML={{ __html: note.content }}
+                  ></div>
+                </div>
+                <p className="note-created-date">{formatDate(note.createdAt)}</p>
               </div>
-              <p className="paste-created-date">{formatDate(paste.createdAt)}</p>
-            </div>
-              <div className="paste-nav">
-                <div className="paste-buttons">
+              <div className="note-nav">
+                <div className="note-buttons">
                   <button>
-                    <NavLink to={`/?pasteId=${paste._id}`}><MdOutlineModeEdit /></NavLink>
+                    <NavLink to={`/?noteId=${note._id}`}><MdOutlineModeEdit /></NavLink>
                   </button>
 
-                  <button onClick={() => clickDelete(paste._id)}><MdDelete /></button>
+                  <button onClick={() => clickDelete(note._id)}><MdDelete /></button>
 
                   <button>
-                    <NavLink to={`/pastes/${paste._id}`}><CiRead /></NavLink>
+                    <NavLink to={`/notes/${note._id}`}><CiRead /></NavLink>
                   </button>
 
-                  <button
-                    onClick={() => {copyText(paste?.content)}}>
+                  <button onClick={() => { copyText(note?.content) }}>
                     <FaRegCopy />
                   </button>
 
@@ -136,7 +138,7 @@ const Paste = () => {
                       className="share-btn"
                       onClick={() => {
                         toggleShare();
-                        shareLink(paste._id);
+                        shareLink(note._id);
                       }}
                     >
                       <FaShareAlt />
@@ -161,24 +163,21 @@ const Paste = () => {
 
                           <input
                             type="text"
-                            value={Sharelink}
+                            value={shareLinkValue}
                             className="copy-link"
                             readOnly
                           />
 
                           <div className="icons">
-                            <FacebookShareButton
-                              url={Sharelink}
-                              quote="Check out this note" id='Fb'
-                            >
-                              <FacebookIcon id='Fb-icon'/>
+                            <FacebookShareButton url={shareLinkValue} quote="Check out this note" id='Fb'>
+                              <FacebookIcon id='Fb-icon' />
                             </FacebookShareButton>
 
-                            <TwitterShareButton url={Sharelink} id='X'>
+                            <TwitterShareButton url={shareLinkValue} id='X'>
                               <TwitterIcon id='X-icon' />
                             </TwitterShareButton>
 
-                            <EmailShareButton url={Sharelink} id='Email'>
+                            <EmailShareButton url={shareLinkValue} id='Email'>
                               <EmailIcon id='Email-icon' />
                             </EmailShareButton>
                           </div>
@@ -188,11 +187,10 @@ const Paste = () => {
                   </div>
                 </div>
 
-                <div className="paste-created-date">
+                <div className="note-created-date">
                   <button id="download-btn" onClick={downloadPdf}>
                     Download
                   </button>
-                  
                 </div>
               </div>
             </div>
@@ -200,10 +198,10 @@ const Paste = () => {
       </div>
 
       <button id="delete-all" onClick={deleteAll}>
-        Reset All Pastes
+        Reset All Notes
       </button>
     </div>
   );
 };
 
-export default Paste;
+export default Note;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { addToPastes, updateToPastes } from '../Redux/pasteSlice';
+import { addToNotes, updateToNotes } from '../Redux/noteSlice';
 import toast from 'react-hot-toast';
 import '../css components/home.css';
 import { FaBold } from "react-icons/fa";
@@ -10,12 +10,13 @@ import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import { LiaItalicSolid } from "react-icons/lia";
 import { HiOutlineUnderline } from "react-icons/hi2";
+
 const Home = () => {
   const [title, setTitle] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
-  const pasteId = searchParams.get("pasteId");
-  const Dispatch = useDispatch();
-  const allPastes = useSelector((state) => state.paste.pastes);
+  const noteId = searchParams.get("noteId");
+  const dispatch = useDispatch();
+  const allNotes = useSelector((state) => state.note.notes);
 
   const editor = useEditor({
     extensions: [StarterKit, Underline],
@@ -23,30 +24,30 @@ const Home = () => {
   });
 
   useEffect(() => {
-    if (pasteId) {
-      const paste = allPastes.find((p) => p._id === pasteId);
-      if (paste) {
-        setTitle(paste.title);
-        editor?.commands.setContent(paste.content || '');
+    if (noteId) {
+      const note = allNotes.find((n) => n._id === noteId);
+      if (note) {
+        setTitle(note.title);
+        editor?.commands.setContent(note.content || '');
       }
     }
-  }, [pasteId, allPastes, editor]);
+  }, [noteId, allNotes, editor]);
 
-  const createPaste = () => {
+  const createNote = () => {
     const content = editor?.getHTML() || '';
     const isEditorEmpty = editor?.isEmpty;
-    const paste = {
-      title:title,
-      content:content,
-      _id: pasteId || Date.now().toString(36),
+    const note = {
+      title: title,
+      content: content,
+      _id: noteId || Date.now().toString(36),
       createdAt: new Date().toISOString(),
     };
 
-    if (paste.title && !isEditorEmpty) {
-      if (pasteId) {
-        Dispatch(updateToPastes(paste));
+    if (note.title && !isEditorEmpty) {
+      if (noteId) {
+        dispatch(updateToNotes(note));
       } else {
-        Dispatch(addToPastes(paste));
+        dispatch(addToNotes(note));
       }
     } else {
       toast("Field can't be empty");
@@ -62,13 +63,13 @@ const Home = () => {
       <div className='title-btn'>
         <input
           type="text"
-          id='paste-title'
+          id='note-title'
           placeholder='Enter title here'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <button onClick={createPaste} id='paste-create'>
-          {pasteId ? "Update my Paste" : "Create my Paste"}
+        <button onClick={createNote} id='note-create'>
+          {noteId ? "Update my Note" : "Create my Note"}
         </button>
       </div>
 
@@ -87,8 +88,8 @@ const Home = () => {
         </button>
       </div>
 
-      <div className="textarea" >
-        <EditorContent editor={editor} className="details" id="description"/>
+      <div className="textarea">
+        <EditorContent editor={editor} className="details" id="description" />
       </div>
     </div>
   );

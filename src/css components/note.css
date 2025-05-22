@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-.paste-container{
+.note-container{
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-.paste-history{
+.note-history{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +25,7 @@
   margin: 0.7rem 0rem;
   border-radius: 0.625rem;
 }
-.paste-contents{
+.note-contents{
   width: 75%;
   display: flex;
   justify-content: space-between;
@@ -35,11 +35,11 @@
   padding: 0.5rem 1rem;
   border-radius: 0.625rem;
 }
-.paste-contents:hover{
+.note-contents:hover{
   border: 1.5px solid #646cff;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-.paste-details{
+.note-details{
   width:100%;
   display: flex;
   flex-direction: column;
@@ -48,9 +48,9 @@
   overflow: hidden;
 
 }
-/* .paste-details p{
+/* .note-details p{
 } */
-.paste-nav{
+.note-nav{
   width: 45%;
   display: flex;
   flex-direction: column;
@@ -58,29 +58,29 @@
   align-items: end;
   /* padding:0.3rem 0.1rem; */
 }
-.paste-buttons{
+.note-buttons{
   display: flex;
   justify-content: center;
   gap: 0.4rem;
   flex-wrap: wrap;
 }
 @media screen and (max-width:690px){
-  .paste-buttons{
+  .note-buttons{
     flex-direction: column;
     padding-right: 0.2rem;
   }
-  .paste-nav{
+  .note-nav{
     padding: 0.3rem;
   }
   .date-contents{
     width: 60%;
   }
-  .paste-nav{
+  .note-nav{
     width: 40%;
     gap: 1.2rem;
   }
 }
-.paste-created-date{
+.note-created-date{
   font-size: x-small;
 }
 .share{
@@ -131,7 +131,7 @@
   flex-direction: column;
   gap: 1rem;
 }
-#paste-content{
+#note-content{
   /* opacity: 0.8; */
   text-align: start;
 }
@@ -154,7 +154,7 @@
   height: 100%;
   width: 100%;
 }
-.paste-created-date{
+.note-created-date{
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -172,7 +172,7 @@
 #delete-all:hover{
   border: 1.3px solid red;
 }
-.paste-buttons button{
+.note-buttons button{
   width: auto;
   height: auto;
 }
@@ -183,13 +183,13 @@
   width: 45%;
   /* height: 100%; */
 }
-.paste-details{
+.note-details{
   width: 100%; /* or a fixed value like 300px */
   white-space: normal;
   overflow-wrap: break-word;
   word-break: break-word;
 }
-#paste-content{
+#note-content{
   opacity: 0.8;
 }
 .search-txt{
