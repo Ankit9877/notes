@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeNote, resetAllNotes } from '../Redux/noteSlice';
 import toast from 'react-hot-toast';
 import { NavLink } from 'react-router-dom';
-import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import {
   EmailShareButton,
   FacebookShareButton,
-  WhatsappShareButton,
   TwitterShareButton,
   FacebookIcon,
   TwitterIcon,
@@ -27,7 +25,6 @@ const Note = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [share, setShare] = useState(false);
   const [shareLinkValue, setShareLinkValue] = useState('');
-  const pdfRef = useRef();
   const dispatch = useDispatch();
 
   const toggleShare = () => setShare(!share);
@@ -60,22 +57,22 @@ const Note = () => {
     });
   };
 
-  const downloadPdf = () => {
-    const input = pdfRef.current;
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4', true);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = canvas.width;
-      const imgHeight = canvas.height;
-      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-      const imgX = (pdfWidth - imgWidth * ratio) / 2;
-      const imgY = 30;
+  const downloadPdf = (note) => {
+    const doc = new jsPDF();
+    const title = note.title;
 
-      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-      pdf.save('Note.pdf');
-    });
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = note.content ;
+    const content = tempElement.innerText;
+
+    doc.setFontSize(16);
+    doc.text(title, 10, 20);
+
+    doc.setFontSize(12);
+    const splitContent = doc.splitTextToSize(content, 180);
+    doc.text(splitContent, 10, 30);
+
+    doc.save(`Note-${note._id}.pdf`);
   };
 
   const deleteAll = () => {
@@ -108,7 +105,7 @@ const Note = () => {
           filterData.map((note) => (
             <div className="note-contents" key={note?._id}>
               <div className='date-contents'>
-                <div className="note-details" ref={pdfRef}>
+                <div className="note-details">
                   <p>{note.title}</p>
                   <div
                     id="note-content"
@@ -188,7 +185,7 @@ const Note = () => {
                 </div>
 
                 <div className="note-created-date">
-                  <button id="download-btn" onClick={downloadPdf}>
+                  <button id="download-btn" onClick={() => downloadPdf(note)}>
                     Download
                   </button>
                 </div>
